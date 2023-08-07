@@ -59,55 +59,6 @@
 <!-- bootstrap nav bar ends -->
 
 
-<!-- nav bar start -->
-<!-- <nav>
-    <div class="navbar">
-      <div class="logo"><a href="https://www.zefratrading.com/"><img src="image/zefrablack.png"
-        class="logo-img" alt=""></a>
-</div>
-        <i class='bx bx-menu'></i>
-        
-        <div class="nav-links">
-            <div class="sidebar-logo">
-                <span class="logo-name"></span>
-                <i class='bx bx-x'></i>
-            </div>
-            <ul class="links">
-                <li><a href="#">HOME</a></li>
-                <li>
-                    <a href="#about-us" >ABOUT US</a>
-                </li>   
-                <li>
-                    <a href="#services">SERVICES</a>
-               
-                    <ul class="htmlCss-sub-menu sub-menu">
-                        <li><a href="#">Interior Services</a></li>
-                        <li><a href="#">Exterior Services</a></li>
-                        <li><a href="#">Leather Care Services</a></li>
-                        <li><a href="#">Aircraft Paint Services</a></li>
-                        <li><a href="#">Flight Department Support Services</a></li>
-                        <li><a href="#">Commercial Aircraft Appearance Services</a></li>
-                        <li><a href="#">Aviation Cleaning Supply</a></li>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="#">CAREERS</a>
-                    <ul class="js-sub-menu sub-menu">
-                        <li><a href="https://www.zefratrading.com/company.html">About Us</a></li>
-                        <li><a href="https://www.zefratrading.com/careers.html">Careers</a></li>
-                    </ul>
-                </li>
-                <li><a href="https://www.zefratrading.com/blog">CONTACT</a></li>
-                
-            </ul>
-        </div>
-    </div>
-</nav> -->
-
-<!-- navbar ends -->
-
  <!-- banner starts -->
  <div class="head">
     <div class="heading-para">
@@ -377,44 +328,6 @@
     <!-- Section one end -->
   <!-- About us ends -->
   
-  
-  
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-    // sidebar open close js code
-    let navLinks = document.querySelector(".nav-links");
-    let menuOpenBtn = document.querySelector(".navbar .bx-menu");
-    let menuCloseBtn = document.querySelector(".nav-links .bx-x");
-    menuOpenBtn.onclick = function () {
-        navLinks.style.left = "0";
-    }
-    menuCloseBtn.onclick = function () {
-        navLinks.style.left = "-100%";
-    }
-    // sidebar submenu open close js code
-    let htmlcssArrow = document.querySelector(".htmlcss-arrow");
-    htmlcssArrow.onclick = function () {
-        navLinks.classList.toggle("show1");
-    }
-    let jsArrow = document.querySelector(".js-arrow");
-    jsArrow.onclick = function () {
-        navLinks.classList.toggle("show3");
-    }
-</script>
 
 
 
@@ -494,5 +407,115 @@
   
   <div class="copyright">
     <span>© 2023 Zefra trading private limited. All Rights Reserved.</span>
-    <!--   -->
   </div>
+
+
+
+  <script>
+    // sidebar open close js code
+    let navLinks = document.querySelector(".nav-links");
+    let menuOpenBtn = document.querySelector(".navbar .bx-menu");
+    let menuCloseBtn = document.querySelector(".nav-links .bx-x");
+    menuOpenBtn.onclick = function () {
+        navLinks.style.left = "0";
+    }
+    menuCloseBtn.onclick = function () {
+        navLinks.style.left = "-100%";
+    }
+    // sidebar submenu open close js code
+    let htmlcssArrow = document.querySelector(".htmlcss-arrow");
+    htmlcssArrow.onclick = function () {
+        navLinks.classList.toggle("show1");
+    }
+    let jsArrow = document.querySelector(".js-arrow");
+    jsArrow.onclick = function () {
+        navLinks.classList.toggle("show3");
+    }
+</script>
+<!-- Add jQuery library before this script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Your HTML code -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- ... (your existing code) ... -->
+</nav>
+
+<script>
+  $(document).ready(function () {
+    // Store the clicked item in a variable to close it later
+    var previousItem = null;
+
+    // Function to close the dropdown
+    function closeDropdown() {
+      if (previousItem) {
+        previousItem.removeClass('show');
+        previousItem = null;
+      }
+    }
+
+    // Function to close the menu
+    function closeMenu() {
+      $('.navbar-collapse').removeClass('show');
+      $('.navbar-toggler').attr('aria-expanded', 'false');
+    }
+
+    // Function to scroll to the section and close the menu
+    function scrollToSection(target) {
+      $('html, body').animate({
+        scrollTop: $(target).offset().top
+      }, 1000, function () {
+        // After scrolling, close the menu
+        closeMenu();
+        // Close the dropdown if open
+        closeDropdown();
+      });
+    }
+
+    // Close the menu and dropdown when clicking outside them
+    $(document).click(function (e) {
+      if (
+        !$(e.target).hasClass('navbar-toggler') &&
+        !$(e.target).hasClass('navbar-collapse') &&
+        !$(e.target).hasClass('dropdown-toggle')
+      ) {
+        closeMenu();
+        closeDropdown();
+      }
+    });
+
+    // Toggle the menu on click
+    $('.navbar-toggler').click(function (e) {
+      e.preventDefault();
+      var navbarCollapse = $('.navbar-collapse');
+      if (navbarCollapse.hasClass('show')) {
+        closeMenu();
+      } else {
+        navbarCollapse.addClass('show');
+        $(this).attr('aria-expanded', 'true');
+      }
+    });
+
+    // Toggle the dropdown on click
+    $('.dropdown-toggle').click(function (e) {
+      e.preventDefault();
+      var dropdownMenu = $(this).next('.dropdown-menu');
+      if (dropdownMenu.hasClass('show')) {
+        closeDropdown();
+      } else {
+        closeMenu();
+        dropdownMenu.addClass('show');
+        previousItem = dropdownMenu;
+      }
+    });
+
+    // Scroll to the section when clicking on a menu item or dropdown item
+    $('.navbar-nav').find('a').click(function (e) {
+      e.preventDefault();
+      var target = $(this).attr('href');
+      scrollToSection(target);
+    });
+  });
+</script>
+
+
+
