@@ -122,6 +122,10 @@ nav .navbar .links li .arrow {
   transition: all 0.3s ease;
 
 }
+#exterior{
+  display: flex;
+  flex-direction: row-reverse;
+}
 nav .navbar .links li .sub-menu {
   position: absolute;
   top: 70px;
